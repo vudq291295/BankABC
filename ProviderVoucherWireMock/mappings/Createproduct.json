@@ -1,0 +1,28 @@
+{
+	"mappings": [
+		{
+			"request": {
+				"method": "POST",
+				"url": "/RetriveVoucheCode",
+				"bodyPatterns": [
+					{
+						"equalToJson": {
+							"price": 50
+						}
+					}
+				]
+			},
+			"response": {
+				"status": 202,
+				"jsonBody": {
+				  "voucheCode": "ed03c595-f79c-40cd-863c-cc30e95df655"
+				},
+				"delayDistribution": {
+					"type": "lognormal",
+					"median": 30000,
+					"sigma": 0.4
+				}
+			}
+		}
+	]
+}
