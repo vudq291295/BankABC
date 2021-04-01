@@ -17,5 +17,4 @@ public class CustomerReaderImpl implements ICustomerReader{
 		// TODO Auto-generated method stub
 		return _iCustomerRespository.findById(id).get();
 	}
-
 }

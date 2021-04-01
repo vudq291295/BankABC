@@ -1,7 +1,9 @@
 package org.IntegrateService.PurchasePrepaidDataSIM.Core.Entities;
 
 import java.sql.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,6 +11,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -39,6 +42,10 @@ public class TypeVoucher extends BaseEntity{
     @Column(name="status")
     @Enumerated(EnumType.STRING)
     private StatusTypeVoucher Status;
+
+    @OneToMany(mappedBy = "TypeVoucher", cascade = CascadeType.ALL)
+    private Set<HistoryPurchase> HistoryPurchase;
+
 
 	public Long getId() {
 		return id;
@@ -86,6 +93,14 @@ public class TypeVoucher extends BaseEntity{
 
 	public void setStatus(StatusTypeVoucher status) {
 		Status = status;
+	}
+
+	public Set<HistoryPurchase> getHistoryPurchase() {
+		return HistoryPurchase;
+	}
+
+	public void setHistoryPurchase(Set<HistoryPurchase> historyPurchase) {
+		HistoryPurchase = historyPurchase;
 	}
     
     

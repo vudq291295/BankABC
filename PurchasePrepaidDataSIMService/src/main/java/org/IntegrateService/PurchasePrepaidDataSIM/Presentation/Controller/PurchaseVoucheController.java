@@ -1,0 +1,35 @@
+package org.IntegrateService.PurchasePrepaidDataSIM.Presentation.Controller;
+
+import javax.servlet.annotation.HandlesTypes;
+
+import org.IntegrateService.PurchasePrepaidDataSIM.Core.Interface.Applicationlogic.IPurchaseVoucheReader;
+import org.IntegrateService.PurchasePrepaidDataSIM.Model.PurchaseVoucheRequest;
+import org.IntegrateService.PurchasePrepaidDataSIM.Model.VoucherResponseMessage;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("purchase_vouche")
+public class PurchaseVoucheController {
+
+	@Autowired
+	IPurchaseVoucheReader purchaseVoucheReader;
+	  
+	@PostMapping
+	@ResponseBody
+	public ResponseEntity PurchaseVouche(@RequestBody PurchaseVoucheRequest purchaseVoucheRequest ) {
+		var result =  purchaseVoucheReader.PurchaseVouche(purchaseVoucheRequest);
+		if(!result.isIsSuccess())
+		{
+			  return new ResponseEntity(null,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<VoucherResponseMessage>(result,HttpStatus.OK);
+	}
+}

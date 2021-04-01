@@ -15,13 +15,9 @@
 			"response": {
 				"status": 202,
 				"jsonBody": {
-				  "voucheCode": "ed03c595-f79c-40cd-863c-cc30e95df655"
+				  "voucherCode": "ed03c595-f79c-40cd-863c-cc30e95df655"
 				},
-				"delayDistribution": {
-					"type": "lognormal",
-					"median": 30000,
-					"sigma": 0.4
-				}
+				"fixedDelayMilliseconds": 2910
 			}
 		}
 	]

@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("Test")
 public class TestController {
-	
+
 	  @Autowired 
 	  ICustomerReader customerReader;
 
-	  
+	  	  
 	  @GetMapping("/users")
 	  @Secured( value={"ROLE_ANONYMOUS"})
 	  public Customer getAllUsers(@RequestHeader("id") Long id) {

@@ -31,9 +31,6 @@ public class Customer extends BaseEntity{
     @Size(max = 200)
     private String Name;
 
-    @OneToMany(mappedBy = "Customer", cascade = CascadeType.ALL)
-    private Set<HistoryPurchase> HistoryPurchase;
-
 	public Long getId() {
 		return Id;
 	}
@@ -58,12 +55,5 @@ public class Customer extends BaseEntity{
 		Name = name;
 	}
 
-	public Set<HistoryPurchase> getHistoryPurchase() {
-		return HistoryPurchase;
-	}
-
-	public void setHistoryPurchase(Set<HistoryPurchase> historyPurchase) {
-		HistoryPurchase = historyPurchase;
-	}
 
 }

@@ -12,6 +12,5 @@ public class HistoryPurchaseReaderImpl implements IHistoryPurchaseReader{
 
 	public HistoryPurchaseReaderImpl(ICustomerRespository iCustomerRespository) {
 		_iCustomerRespository = iCustomerRespository;
-		
 	}
 }

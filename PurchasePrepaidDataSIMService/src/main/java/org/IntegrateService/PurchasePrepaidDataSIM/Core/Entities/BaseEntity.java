@@ -1,9 +1,13 @@
 package org.IntegrateService.PurchasePrepaidDataSIM.Core.Entities;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
 @MappedSuperclass
@@ -14,10 +18,22 @@ public class BaseEntity {
     private long RecordVersion;
 
 	@Column(name="created_date")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date CreatedDate;
 
 	@Column(name="last_update_date")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date LastUpdateDate;
+
+    @PrePersist
+    protected void onCreate() {
+    	LastUpdateDate = CreatedDate = new Date();
+    }
+    
+    @PreUpdate
+    protected void onUpdate() {
+    	LastUpdateDate = new Date();
+    }
 
 	public long getRecordVersion() {
 		return RecordVersion;
