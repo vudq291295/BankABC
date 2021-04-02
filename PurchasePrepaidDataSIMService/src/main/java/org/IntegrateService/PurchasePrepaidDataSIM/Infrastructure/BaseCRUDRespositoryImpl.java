@@ -21,7 +21,6 @@ public class BaseCRUDRespositoryImpl<T,  ID extends Serializable> extends Simple
     @Transactional
     @Override
 	public T findOne(Long primaryKey) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

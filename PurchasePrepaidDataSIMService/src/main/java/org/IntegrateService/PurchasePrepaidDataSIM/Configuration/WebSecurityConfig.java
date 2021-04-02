@@ -30,9 +30,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		// configure AuthenticationManager so that it knows from where to load
-		// user for matching credentials
-		// Use BCryptPasswordEncoder
 		auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
 	}
 	
@@ -58,15 +55,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
 		.antMatchers("/hisoty_purchase**").authenticated()
 		.and().authorizeRequests().antMatchers("/authenticate").permitAll()
-//        .and().authorizeRequests().antMatchers("/swagger-ui**").permitAll()
-//        .and().authorizeRequests().antMatchers("/webjars**").permitAll()
-//        .and().authorizeRequests()
         .anyRequest().permitAll().and().
-		// make sure we use stateless session; session won't be used to
-		// store user's state.
 		exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
 		.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		//.antMatchers("/type_voucher**").permitAll();
+
 		http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
 	}

@@ -21,14 +21,6 @@ public class ReposirotyJPAConfig {
     };
     @Autowired
     DataSource dataSource;
-//    (Environment env) {
-//        DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
-////        dataSourceBuilder.driverClassName("com.mysql.jdbc.Driver");
-//        dataSourceBuilder.url("jdbc:mysql://localhost:3306/purchase_data_sim?useSSL=false");
-//        dataSourceBuilder.username("root");
-//        dataSourceBuilder.password("AAssdd12@123");
-//        return dataSourceBuilder.build();
-//    }
     
     @Bean
     LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, Environment env) {

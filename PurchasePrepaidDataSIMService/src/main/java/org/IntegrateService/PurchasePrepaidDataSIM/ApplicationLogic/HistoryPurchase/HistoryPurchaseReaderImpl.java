@@ -43,7 +43,6 @@ public class HistoryPurchaseReaderImpl implements IHistoryPurchaseReader{
 	public List<HistoryPurchase> getHistoryByPhoneNumber(String phoneNumber) {
 		var a = new HistoryPurchaseSpecification(phoneNumber);
 		List<HistoryPurchase> results = _historyPurchaseRepository.findAll(Specification.where(a));
-		// TODO Auto-generated method stub
 		return results;
 	}
 

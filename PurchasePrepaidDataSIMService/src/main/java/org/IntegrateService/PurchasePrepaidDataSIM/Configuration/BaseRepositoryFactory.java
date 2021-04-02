@@ -18,7 +18,6 @@ extends JpaRepositoryFactory{
 	public BaseRepositoryFactory(EntityManager entityManager) {
 		super(entityManager);
 		em = entityManager;
-		// TODO Auto-generated constructor stub
 	}
 	
 	@SuppressWarnings("unchecked")

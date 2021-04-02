@@ -10,7 +10,6 @@ public class TypeVoucherRepositoryImpl extends BaseCRUDRespositoryImpl<TypeVouch
 
 	public TypeVoucherRepositoryImpl(Class<TypeVoucher> domainClass, EntityManager entityManager) {
 		super(domainClass, entityManager);
-		// TODO Auto-generated constructor stub
 	}
 
 }

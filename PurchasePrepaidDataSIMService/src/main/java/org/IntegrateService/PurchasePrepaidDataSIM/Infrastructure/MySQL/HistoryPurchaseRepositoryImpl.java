@@ -10,7 +10,6 @@ public class HistoryPurchaseRepositoryImpl extends BaseCRUDRespositoryImpl<Histo
 
 	public HistoryPurchaseRepositoryImpl(Class<HistoryPurchase> domainClass, EntityManager entityManager) {
 		super(domainClass, entityManager);
-		// TODO Auto-generated constructor stub
 	}
 
 }

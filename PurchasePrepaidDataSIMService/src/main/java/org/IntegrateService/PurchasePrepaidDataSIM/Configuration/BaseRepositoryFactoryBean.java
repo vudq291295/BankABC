@@ -13,7 +13,6 @@ I extends Serializable> extends JpaRepositoryFactoryBean<R, T, I>{
 
 	public BaseRepositoryFactoryBean(Class<? extends R> repositoryInterface) {
 		super(repositoryInterface);
-		// TODO Auto-generated constructor stub
 	}
 
     @SuppressWarnings("rawtypes")

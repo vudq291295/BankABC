@@ -92,7 +92,6 @@ public class Consumer {
 		    	voucherResponseMessage.setMessage("Error When Retrive Data");
 	    	}
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
 			voucherResponseMessage.setMessage("Error When Parse JSON");
 		}
 		catch (HttpTimeoutException ex) {
@@ -100,7 +99,6 @@ public class Consumer {
 		}
 		catch (Exception e) {
 			System.out.println("e: "+e);
-			// TODO: handle exception
 			voucherResponseMessage.setMessage("Error");
 		}
     	System.out.println(voucherResponseMessage.getMessage());

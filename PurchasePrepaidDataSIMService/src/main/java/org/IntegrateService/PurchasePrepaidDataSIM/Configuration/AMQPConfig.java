@@ -30,11 +30,7 @@ public class AMQPConfig {
 	    rabbitTemplate.setReplyAddress(replyQueue().getName());
 	    return rabbitTemplate;
   }
-//    
-//    @Bean
-//    public AsyncRabbitTemplate asyncRabbitTemplate(RabbitTemplate rabbitTemplate){
-//        return new AsyncRabbitTemplate(rabbitTemplate);
-//    }
+
   @Bean
   public SimpleMessageListenerContainer replyListenerContainer(ConnectionFactory connectionFactory) {
       SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();

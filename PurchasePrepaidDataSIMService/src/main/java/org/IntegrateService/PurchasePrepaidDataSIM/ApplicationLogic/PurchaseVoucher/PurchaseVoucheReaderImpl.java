@@ -24,9 +24,9 @@ public class PurchaseVoucheReaderImpl implements IPurchaseVoucheReader{
 
 	@Override
 	public VoucherResponseMessage PurchaseVouche(PurchaseVoucheRequest purchaseVoucheRequest) {
-		// Assume Payment is success
+		//TODO:  Assume Payment is success
 		
-		// Add request purchase to historyPurchase
+		//  Add request purchase to historyPurchase
 		var historyPurchase = new HistoryPurchase();
 		historyPurchase.setPhoneNumber(purchaseVoucheRequest.getPhoneNumber());
 		historyPurchase.setTypeVoucherID(purchaseVoucheRequest.getTypeVoucherId());
