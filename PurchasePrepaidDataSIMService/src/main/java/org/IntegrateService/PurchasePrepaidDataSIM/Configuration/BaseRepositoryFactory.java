@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.persistence.EntityManager;
 
 import org.IntegrateService.PurchasePrepaidDataSIM.Infrastructure.BaseCRUDRespositoryImpl;
-import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.JpaRepositoryFactory;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.data.repository.core.RepositoryInformation;
@@ -22,6 +21,7 @@ extends JpaRepositoryFactory{
 		// TODO Auto-generated constructor stub
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	protected SimpleJpaRepository<?, ?> getTargetRepository(RepositoryInformation information, EntityManager em) {
 		return new BaseCRUDRespositoryImpl<T, I>((Class<T>) information.getDomainType(), em);
@@ -30,5 +30,9 @@ extends JpaRepositoryFactory{
 	@Override
 	protected Class<?> getRepositoryBaseClass(RepositoryMetadata metadata) {
 	    return BaseCRUDRespositoryImpl.class;
+	}
+
+	public EntityManager getEm() {
+		return em;
 	}
 }

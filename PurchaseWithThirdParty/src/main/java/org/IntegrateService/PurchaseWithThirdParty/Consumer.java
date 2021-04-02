@@ -16,7 +16,6 @@ import org.IntegrateService.PurchaseWithThirdParty.Model.VoucherResponseMessage;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -36,7 +35,12 @@ public class Consumer {
 		voucherResponseMessage.setIsSuccess(false);
     	try {
 	    	System.out.println(purchaseVoucheRequest.getPhoneNumber());
-	        var values = new HashMap<String, Integer>() {{
+	        var values = new HashMap<String, Integer>() {/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+			{
 	            put("price", 50);
 	        }};
 	        var objectMapper = new ObjectMapper();
@@ -59,6 +63,8 @@ public class Consumer {
 	    		try {
 			    	var result = objectMapper.readValue(responseFromThirdPt.body(), VoucherResponseMessage.class);
 			    	long end = System.currentTimeMillis();
+			    	voucherResponseMessage.setMessage("Your voucher can send by sms later");
+
 			    	if(end-start >=2900) {
 			    		SendSMSVoucherRequest sendSMSVoucherRequest = new SendSMSVoucherRequest();
 //			    		sendSMSVoucherRequest = (SendSMSVoucherRequest) voucherResponseMessage;
@@ -72,6 +78,8 @@ public class Consumer {
 			    	else {
 				    	voucherResponseMessage.setIsSuccess(true);
 				    	voucherResponseMessage.setVoucherCode(result.getVoucherCode());
+				    	voucherResponseMessage.setMessage("");
+
 						System.out.println("end-start: "+(end-start));
 			    	}
 	    		}

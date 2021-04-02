@@ -1,7 +1,5 @@
 package org.IntegrateService.PurchasePrepaidDataSIM.Configuration;
 
-import java.util.Properties;
-
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 

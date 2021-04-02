@@ -3,18 +3,13 @@ package org.IntegrateService.PurchasePrepaidDataSIM.ApplicationLogic.PurchaseVou
 import org.IntegrateService.PurchasePrepaidDataSIM.Core.Entities.HistoryPurchase;
 import org.IntegrateService.PurchasePrepaidDataSIM.Core.Enums.HistoryVoucherStatus;
 import org.IntegrateService.PurchasePrepaidDataSIM.Core.Interface.Applicationlogic.IPurchaseVoucheReader;
-import org.IntegrateService.PurchasePrepaidDataSIM.Core.Interface.MySQLRepository.ICustomerRespository;
 import org.IntegrateService.PurchasePrepaidDataSIM.Core.Interface.MySQLRepository.IHistoryPurchaseRepository;
 import org.IntegrateService.PurchasePrepaidDataSIM.Model.PurchaseVoucheRequest;
 import org.IntegrateService.PurchasePrepaidDataSIM.Model.VoucherResponseMessage;
-import org.springframework.amqp.rabbit.AsyncRabbitTemplate;
-import org.springframework.amqp.rabbit.AsyncRabbitTemplate.RabbitConverterFuture;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.util.concurrent.ListenableFutureCallback;
 
 @Service
 public class PurchaseVoucheReaderImpl implements IPurchaseVoucheReader{
