@@ -34,16 +34,12 @@ public class PurchaseVoucheReaderImpl implements IPurchaseVoucheReader{
 			historyPurchase.setStatus(HistoryVoucherStatus.PENDING);
 			var historyPurchaseEntity = _historyPurchaseRepository.save(historyPurchase);
 			purchaseVoucheRequest.setId(historyPurchaseEntity.getId());
-			System.out.println("historyPurchaseEntity getId: "+historyPurchaseEntity.getId());
-			System.out.println("historyPurchaseEntity getTypeVoucherID: "+historyPurchaseEntity.getTypeVoucherID());
-
 			asyncRabbitTemplate.setReceiveTimeout(3000);
 			rabbitConverter = asyncRabbitTemplate.convertSendAndReceiveAsType(
 					  "reflectoring.cars",
 					  ROUTING_KEY,
 					  purchaseVoucheRequest,
 	                new ParameterizedTypeReference<>() {});
-			System.out.println("rabbitConverterFuture: "+rabbitConverter);
 
 			if(rabbitConverter!=null && rabbitConverter.isIsSuccess()) {
 				historyPurchaseEntity.setVoucherCode(rabbitConverter.getVoucherCode());

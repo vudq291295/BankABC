@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("purchase_vouche")
 public class PurchaseVoucheController {
 
-	//TODO: Add Handle Exception
-	//TODO: Add Validation
 	@Autowired
 	IPurchaseVoucheReader purchaseVoucheReader;
 	  
