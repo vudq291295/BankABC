@@ -2,13 +2,17 @@ package org.IntegrateService.PurchasePrepaidDataSIM.Model;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotBlank;
+
 public class PurchaseVoucheRequest implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private Long id;
+	@NotBlank(message = "must be supplied PhoneNumber")
 	private String PhoneNumber;
+	
 	private Long TypeVoucherId;
 
 	public Long getId() {

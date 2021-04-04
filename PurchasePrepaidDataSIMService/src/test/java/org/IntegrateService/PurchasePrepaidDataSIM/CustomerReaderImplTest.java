@@ -29,11 +29,9 @@ class CustomerReaderImplTest {
             return new CustomerReaderImpl();
         }
     }
-//    
+    
     @Autowired
     public ICustomerReader customerReader;
-//    @InjectMocks
-//    ICustomerReader customerReader;
 
     @MockBean 
     ICustomerRespository iCustomerRespository;

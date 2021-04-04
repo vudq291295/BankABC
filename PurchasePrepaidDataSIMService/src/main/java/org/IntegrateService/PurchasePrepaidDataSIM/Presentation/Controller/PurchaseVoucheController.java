@@ -1,5 +1,7 @@
 package org.IntegrateService.PurchasePrepaidDataSIM.Presentation.Controller;
 
+import javax.validation.Valid;
+
 import org.IntegrateService.PurchasePrepaidDataSIM.Core.Interface.Applicationlogic.IPurchaseVoucheReader;
 import org.IntegrateService.PurchasePrepaidDataSIM.Model.PurchaseVoucheRequest;
 import org.IntegrateService.PurchasePrepaidDataSIM.Model.VoucherResponseMessage;
@@ -24,7 +26,7 @@ public class PurchaseVoucheController {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@PostMapping
 	@ResponseBody
-	public ResponseEntity PurchaseVouche(@RequestBody PurchaseVoucheRequest purchaseVoucheRequest ) {
+	public ResponseEntity PurchaseVouche(@Valid @RequestBody PurchaseVoucheRequest purchaseVoucheRequest ) {
 		var result =  purchaseVoucheReader.PurchaseVouche(purchaseVoucheRequest);
 		if(!result.isIsSuccess())
 		{

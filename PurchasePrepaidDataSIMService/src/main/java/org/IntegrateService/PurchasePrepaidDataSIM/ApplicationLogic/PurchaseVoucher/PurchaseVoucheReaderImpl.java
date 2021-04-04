@@ -25,32 +25,36 @@ public class PurchaseVoucheReaderImpl implements IPurchaseVoucheReader{
 	@Override
 	public VoucherResponseMessage PurchaseVouche(PurchaseVoucheRequest purchaseVoucheRequest) {
 		//TODO:  Assume Payment is success
-		
-		//  Add request purchase to historyPurchase
-		var historyPurchase = new HistoryPurchase();
-		historyPurchase.setPhoneNumber(purchaseVoucheRequest.getPhoneNumber());
-		historyPurchase.setTypeVoucherID(purchaseVoucheRequest.getTypeVoucherId());
-		historyPurchase.setStatus(HistoryVoucherStatus.PENDING);
-		var historyPurchaseEntity = _historyPurchaseRepository.save(historyPurchase);
-		purchaseVoucheRequest.setId(historyPurchaseEntity.getId());
-		System.out.println("historyPurchaseEntity getId: "+historyPurchaseEntity.getId());
-		System.out.println("historyPurchaseEntity getTypeVoucherID: "+historyPurchaseEntity.getTypeVoucherID());
+		VoucherResponseMessage rabbitConverter = new VoucherResponseMessage();
+		try {
+			//  Add request purchase to historyPurchase
+			var historyPurchase = new HistoryPurchase();
+			historyPurchase.setPhoneNumber(purchaseVoucheRequest.getPhoneNumber());
+			historyPurchase.setTypeVoucherID(purchaseVoucheRequest.getTypeVoucherId());
+			historyPurchase.setStatus(HistoryVoucherStatus.PENDING);
+			var historyPurchaseEntity = _historyPurchaseRepository.save(historyPurchase);
+			purchaseVoucheRequest.setId(historyPurchaseEntity.getId());
+			System.out.println("historyPurchaseEntity getId: "+historyPurchaseEntity.getId());
+			System.out.println("historyPurchaseEntity getTypeVoucherID: "+historyPurchaseEntity.getTypeVoucherID());
 
-		asyncRabbitTemplate.setReceiveTimeout(3000);
-		VoucherResponseMessage rabbitConverter = asyncRabbitTemplate.convertSendAndReceiveAsType(
-				  "reflectoring.cars",
-				  ROUTING_KEY,
-				  purchaseVoucheRequest,
-                new ParameterizedTypeReference<>() {});
-		System.out.println("rabbitConverterFuture: "+rabbitConverter);
+			asyncRabbitTemplate.setReceiveTimeout(3000);
+			rabbitConverter = asyncRabbitTemplate.convertSendAndReceiveAsType(
+					  "reflectoring.cars",
+					  ROUTING_KEY,
+					  purchaseVoucheRequest,
+	                new ParameterizedTypeReference<>() {});
+			System.out.println("rabbitConverterFuture: "+rabbitConverter);
 
-		if(rabbitConverter!=null && rabbitConverter.isIsSuccess()) {
-			historyPurchaseEntity.setVoucherCode(rabbitConverter.getVoucherCode());
-			historyPurchaseEntity.setStatus(HistoryVoucherStatus.DONE);
-			_historyPurchaseRepository.save(historyPurchaseEntity);
+			if(rabbitConverter!=null && rabbitConverter.isIsSuccess()) {
+				historyPurchaseEntity.setVoucherCode(rabbitConverter.getVoucherCode());
+				historyPurchaseEntity.setStatus(HistoryVoucherStatus.DONE);
+				_historyPurchaseRepository.save(historyPurchaseEntity);
+			}
 		}
-		else {
+		catch(Exception ex) {
+			
 		}
+
 	    return rabbitConverter;
 	}
 
